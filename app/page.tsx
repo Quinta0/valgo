@@ -257,12 +257,12 @@ export default function Component() {
         </div>
         <div className="flex mt-10 space-x-4">
           <Button onClick={startAnimation}>Start</Button>
-          <Button onClick={pauseAnimation} variant="outline" a>Pause</Button>
+          <Button onClick={pauseAnimation} variant="outline">Pause</Button>
           <Button onClick={resetAnimation}>Reset</Button>
           <Button onClick={shuffleArray}>Shuffle</Button>
           <DropdownMenu>
-            <DropdownMenuTrigger>
-              {currentAlgorithm.charAt(0).toUpperCase() + currentAlgorithm.slice(1)} Sort
+            <DropdownMenuTrigger asChild>
+              <Button>{currentAlgorithm.charAt(0).toUpperCase() + currentAlgorithm.slice(1)} Sort</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuRadioGroup
@@ -326,4 +326,3 @@ function ArrowUpDownIcon(props) {
       </svg>
   )
 }
-
