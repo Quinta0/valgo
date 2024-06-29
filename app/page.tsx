@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import React from 'react';
 import { Button } from "../components/ui/button"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "../components/ui/dropdown-menu"
 import { Slider } from "../components/ui/slider"
@@ -346,7 +347,7 @@ export default function Component() {
   )
 }
 
-function ArrowUpDownIcon(props) {
+function ArrowUpDownIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
       <svg
           {...props}
@@ -365,5 +366,7 @@ function ArrowUpDownIcon(props) {
         <path d="m3 8 4-4 4 4" />
         <path d="M7 4v16" />
       </svg>
-  )
+  );
 }
+
+export default ArrowUpDownIcon;
