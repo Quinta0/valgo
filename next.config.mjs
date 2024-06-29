@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    output: 'export',
+    assetPrefix: process.env.NODE_ENV === 'production' ? '/valgo/' : '',
+    basePath: process.env.NODE_ENV === 'production' ? '/valgo' : '',
+};
 
 export default nextConfig;

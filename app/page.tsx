@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "@/components/ui/dropdown-menu"
 import { Slider } from "@/components/ui/slider"
@@ -11,6 +11,8 @@ export default function Component() {
   const [isRunning, setIsRunning] = useState(false)
   const [currentAlgorithm, setCurrentAlgorithm] = useState("bubble")
   const [arraySize, setArraySize] = useState(20)
+  const pauseRef = useRef(false)
+  const stopRef = useRef(false)
 
   useEffect(() => {
     generateRandomArray(arraySize)
@@ -28,6 +30,8 @@ export default function Component() {
 
   const startAnimation = () => {
     setIsRunning(true)
+    pauseRef.current = false
+    stopRef.current = false
     switch (currentAlgorithm) {
       case "bubble":
         bubbleSort()
@@ -36,13 +40,13 @@ export default function Component() {
         insertionSort()
         break
       case "merge":
-        mergeSort(array, 0, array.length - 1)
+        mergeSort([...array], 0, array.length - 1)
         break
       case "heap":
         heapSort()
         break
       case "quick":
-        quickSort(array, 0, array.length - 1)
+        quickSort([...array], 0, array.length - 1)
         break
       default:
         break
@@ -50,34 +54,59 @@ export default function Component() {
   }
 
   const pauseAnimation = () => {
-    setIsRunning(false)
+    pauseRef.current = true
+  }
+
+  const resumeAnimation = () => {
+    pauseRef.current = false
   }
 
   const resetAnimation = () => {
     setIsRunning(false)
+    pauseRef.current = false
+    stopRef.current = true
     generateRandomArray(arraySize)
+  }
+
+  const checkPauseAndStop = async () => {
+    if (pauseRef.current) {
+      await new Promise(resolve => {
+        const check = () => {
+          if (pauseRef.current && !stopRef.current) {
+            setTimeout(check, 100)
+          } else {
+            resolve(null)
+          }
+        }
+        check()
+      })
+    }
+    return stopRef.current
   }
 
   const bubbleSort = async () => {
     const newArray = [...array]
     for (let i = 0; i < newArray.length; i++) {
       for (let j = 0; j < newArray.length - i - 1; j++) {
+        if (await checkPauseAndStop()) return
         if (newArray[j] > newArray[j + 1]) {
-          ;[newArray[j], newArray[j + 1]] = [newArray[j + 1], newArray[j]]
+          [newArray[j], newArray[j + 1]] = [newArray[j + 1], newArray[j]]
           setArray([...newArray])
           await new Promise((resolve) => setTimeout(resolve, 100))
         }
       }
     }
-    setIsRunning(false)
+    if (!stopRef.current) setIsRunning(false)
   }
 
   const insertionSort = async () => {
     const newArray = [...array]
     for (let i = 1; i < newArray.length; i++) {
+      if (await checkPauseAndStop()) return
       const key = newArray[i]
       let j = i - 1
       while (j >= 0 && newArray[j] > key) {
+        if (await checkPauseAndStop()) return
         newArray[j + 1] = newArray[j]
         j = j - 1
         setArray([...newArray])
@@ -87,10 +116,11 @@ export default function Component() {
       setArray([...newArray])
       await new Promise((resolve) => setTimeout(resolve, 100))
     }
-    setIsRunning(false)
+    if (!stopRef.current) setIsRunning(false)
   }
 
   async function heapify(newArray: number[], n: number, i: number) {
+    if (await checkPauseAndStop()) return
     let largest = i
     const left = 2 * i + 1
     const right = 2 * i + 2
@@ -99,7 +129,7 @@ export default function Component() {
     if (right < n && newArray[right] > newArray[largest]) largest = right
 
     if (largest !== i) {
-      ;[newArray[i], newArray[largest]] = [newArray[largest], newArray[i]]
+      [newArray[i], newArray[largest]] = [newArray[largest], newArray[i]]
       setArray([...newArray])
       await new Promise((resolve) => setTimeout(resolve, 100))
       await heapify(newArray, n, largest)
@@ -110,29 +140,33 @@ export default function Component() {
     const newArray = [...array]
     const n = newArray.length
     for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+      if (await checkPauseAndStop()) return
       await heapify(newArray, n, i)
     }
     for (let i = n - 1; i > 0; i--) {
-      ;[newArray[0], newArray[i]] = [newArray[i], newArray[0]]
+      if (await checkPauseAndStop()) return
+      [newArray[0], newArray[i]] = [newArray[i], newArray[0]]
       setArray([...newArray])
       await new Promise((resolve) => setTimeout(resolve, 100))
       await heapify(newArray, i, 0)
     }
-    setIsRunning(false)
+    if (!stopRef.current) setIsRunning(false)
   }
 
   async function partition(arr: number[], low: number, high: number) {
+    if (await checkPauseAndStop()) return low
     const pivot = arr[high]
     let i = low - 1
     for (let j = low; j < high; j++) {
+      if (await checkPauseAndStop()) return i + 1
       if (arr[j] < pivot) {
         i++
-        ;[arr[i], arr[j]] = [arr[j], arr[i]]
+        [arr[i], arr[j]] = [arr[j], arr[i]]
         setArray([...arr])
         await new Promise((resolve) => setTimeout(resolve, 100))
       }
     }
-    ;[arr[i + 1], arr[high]] = [arr[high], arr[i + 1]]
+    [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]]
     setArray([...arr])
     await new Promise((resolve) => setTimeout(resolve, 100))
     return i + 1
@@ -140,6 +174,7 @@ export default function Component() {
 
   const quickSort = async (arr: number[], low: number, high: number) => {
     if (low < high) {
+      if (await checkPauseAndStop()) return
       const pi = await partition(arr, low, high)
       await quickSort(arr, low, pi - 1)
       await quickSort(arr, pi + 1, high)
@@ -147,6 +182,7 @@ export default function Component() {
   }
 
   const mergeSort = async (arr: number[], left: number, right: number) => {
+    if (await checkPauseAndStop()) return
     if (left < right) {
       const mid = Math.floor((left + right) / 2)
       await mergeSort(arr, left, mid)
@@ -156,6 +192,7 @@ export default function Component() {
   }
 
   const merge = async (arr: number[], left: number, mid: number, right: number) => {
+    if (await checkPauseAndStop()) return
     const n1 = mid - left + 1
     const n2 = right - mid
     const leftArr = new Array(n1)
@@ -167,6 +204,7 @@ export default function Component() {
     let i = 0, j = 0, k = left
 
     while (i < n1 && j < n2) {
+      if (await checkPauseAndStop()) return
       if (leftArr[i] <= rightArr[j]) {
         arr[k] = leftArr[i]
         i++
@@ -180,6 +218,7 @@ export default function Component() {
     }
 
     while (i < n1) {
+      if (await checkPauseAndStop()) return
       arr[k] = leftArr[i]
       i++
       k++
@@ -188,6 +227,7 @@ export default function Component() {
     }
 
     while (j < n2) {
+      if (await checkPauseAndStop()) return
       arr[k] = rightArr[j]
       j++
       k++
@@ -258,6 +298,7 @@ export default function Component() {
         <div className="flex mt-10 space-x-4">
           <Button onClick={startAnimation}>Start</Button>
           <Button onClick={pauseAnimation} variant="outline">Pause</Button>
+          <Button onClick={resumeAnimation} variant="outline">Resume</Button>
           <Button onClick={resetAnimation}>Reset</Button>
           <Button onClick={shuffleArray}>Shuffle</Button>
           <DropdownMenu>
