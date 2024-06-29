@@ -3,19 +3,26 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "@/components/ui/dropdown-menu"
+import { Slider } from "@/components/ui/slider"
 
 export default function Component() {
   const [array, setArray] = useState<number[]>([])
   const [isRunning, setIsRunning] = useState(false)
   const [currentAlgorithm, setCurrentAlgorithm] = useState("bubble")
+  const [arraySize, setArraySize] = useState(20)
 
   useEffect(() => {
-    generateRandomArray()
-  }, [])
+    generateRandomArray(arraySize)
+  }, [arraySize])
 
-  const generateRandomArray = () => {
-    const newArray = Array.from({ length: 50 }, () => Math.floor(Math.random() * 100))
+  const generateRandomArray = (size: number) => {
+    const newArray = Array.from({ length: size }, () => Math.floor(Math.random() * 100))
     setArray(newArray)
+  }
+
+  const shuffleArray = () => {
+    const shuffledArray = [...array].sort(() => Math.random() - 0.5)
+    setArray(shuffledArray)
   }
 
   const startAnimation = () => {
@@ -41,7 +48,7 @@ export default function Component() {
 
   const resetAnimation = () => {
     setIsRunning(false)
-    generateRandomArray()
+    generateRandomArray(arraySize)
   }
 
   const bubbleSort = async () => {
@@ -127,22 +134,28 @@ export default function Component() {
   }
 
   return (
-      <div className="flex flex-col items-center">
-        <div className="flex items-end justify-center w-full h-64 mt-10">
+      <div className="flex flex-col items-center h-screen">
+        <header className="bg-primary text-primary-foreground py-4 px-6  w-full">
+          <h1 className="text-2xl font-bold text-center">Algorithm Visualizer</h1>
+        </header>
+        <div className="flex items-end justify-center min-w-max h-64 mt-10 shadow-2xl p-4">
           {array.map((value, index) => (
               <div
                   key={index}
-                  className={`mx-0.5 bg-blue-500 ${isRunning ? 'bg-red-500' : 'bg-blue-500'}`}
-                  style={{ height: `${value * 2}px`, width: '20px' }}
+                  className={`mx-0.5 ${isRunning ? 'bg-red-500' : 'bg-blue-500'}`}
+                  style={{height: `${value * 2}px`, width: '20px'}}
               ></div>
           ))}
         </div>
         <div className="flex mt-10 space-x-4">
           <Button onClick={startAnimation}>Start</Button>
-          <Button onClick={pauseAnimation}>Pause</Button>
+          <Button onClick={pauseAnimation} variant="outline" a>Pause</Button>
           <Button onClick={resetAnimation}>Reset</Button>
+          <Button onClick={shuffleArray}>Shuffle</Button>
           <DropdownMenu>
-            <DropdownMenuTrigger>Algorithms</DropdownMenuTrigger>
+            <DropdownMenuTrigger>
+              {currentAlgorithm.charAt(0).toUpperCase() + currentAlgorithm.slice(1)} Sort
+            </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuRadioGroup
                   value={currentAlgorithm}
@@ -154,6 +167,15 @@ export default function Component() {
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
+        </div>
+        <div className="flex flex-col items-center mt-10 space-y-4">
+          <label className="text-xl">Array Size: {arraySize}</label>
+          <Slider
+              value={[arraySize]}
+              onValueChange={(value) => setArraySize(value[0])}
+              min={5}
+              max={100}
+          />
         </div>
       </div>
   )
