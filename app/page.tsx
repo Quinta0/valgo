@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "@/components/ui/dropdown-menu"
 import { Slider } from "@/components/ui/slider"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 
 export default function Component() {
   const [array, setArray] = useState<number[]>([])
@@ -36,6 +37,12 @@ export default function Component() {
         break
       case "merge":
         mergeSort(array, 0, array.length - 1)
+        break
+      case "heap":
+        heapSort()
+        break
+      case "quick":
+        quickSort(array, 0, array.length - 1)
         break
       default:
         break
@@ -81,6 +88,62 @@ export default function Component() {
       await new Promise((resolve) => setTimeout(resolve, 100))
     }
     setIsRunning(false)
+  }
+
+  async function heapify(newArray: number[], n: number, i: number) {
+    let largest = i
+    const left = 2 * i + 1
+    const right = 2 * i + 2
+
+    if (left < n && newArray[left] > newArray[largest]) largest = left
+    if (right < n && newArray[right] > newArray[largest]) largest = right
+
+    if (largest !== i) {
+      ;[newArray[i], newArray[largest]] = [newArray[largest], newArray[i]]
+      setArray([...newArray])
+      await new Promise((resolve) => setTimeout(resolve, 100))
+      await heapify(newArray, n, largest)
+    }
+  }
+
+  const heapSort = async () => {
+    const newArray = [...array]
+    const n = newArray.length
+    for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+      await heapify(newArray, n, i)
+    }
+    for (let i = n - 1; i > 0; i--) {
+      ;[newArray[0], newArray[i]] = [newArray[i], newArray[0]]
+      setArray([...newArray])
+      await new Promise((resolve) => setTimeout(resolve, 100))
+      await heapify(newArray, i, 0)
+    }
+    setIsRunning(false)
+  }
+
+  async function partition(arr: number[], low: number, high: number) {
+    const pivot = arr[high]
+    let i = low - 1
+    for (let j = low; j < high; j++) {
+      if (arr[j] < pivot) {
+        i++
+        ;[arr[i], arr[j]] = [arr[j], arr[i]]
+        setArray([...arr])
+        await new Promise((resolve) => setTimeout(resolve, 100))
+      }
+    }
+    ;[arr[i + 1], arr[high]] = [arr[high], arr[i + 1]]
+    setArray([...arr])
+    await new Promise((resolve) => setTimeout(resolve, 100))
+    return i + 1
+  }
+
+  const quickSort = async (arr: number[], low: number, high: number) => {
+    if (low < high) {
+      const pi = await partition(arr, low, high)
+      await quickSort(arr, low, pi - 1)
+      await quickSort(arr, pi + 1, high)
+    }
   }
 
   const mergeSort = async (arr: number[], left: number, right: number) => {
@@ -133,17 +196,62 @@ export default function Component() {
     }
   }
 
+  const getAlgorithmExplanation = () => {
+    switch (currentAlgorithm) {
+      case "bubble":
+        return {
+          title: "Bubble Sort",
+          timeComplexity: "Time: O(n^2)",
+          spaceComplexity: "Space: O(1)",
+          description: "Bubble sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted."
+        }
+      case "insertion":
+        return {
+          title: "Insertion Sort",
+          timeComplexity: "Time: O(n^2)",
+          spaceComplexity: "Space: O(1)",
+          description: "Insertion sort is a simple sorting algorithm that builds the final sorted array one item at a time. It is much less efficient on large lists than more advanced algorithms such as quicksort, heapsort, or merge sort."
+        }
+      case "merge":
+        return {
+          title: "Merge Sort",
+          timeComplexity: "Time: O(n log n)",
+          spaceComplexity: "Space: O(n)",
+          description: "Merge sort is an efficient, stable, comparison-based, divide and conquer sorting algorithm. Most implementations produce a stable sort, meaning that the implementation preserves the input order of equal elements in the sorted output."
+        }
+      case "heap":
+        return {
+          title: "Heap Sort",
+          timeComplexity: "Time: O(n log n)",
+          spaceComplexity: "Space: O(1)",
+          description: "Heap sort is a comparison-based sorting technique based on Binary Heap data structure. It is similar to selection sort where we first find the maximum element and place the maximum element at the end. We repeat the same process for the remaining element."
+        }
+      case "quick":
+        return {
+          title: "Quick Sort",
+          timeComplexity: "Time: O(n log n)",
+          spaceComplexity: "Space: O(log n)",
+          description: "Quick sort is an efficient sorting algorithm that, on average, makes O(n log n) comparisons to sort n items. It is an in-place sort (i.e., it doesn't require any extra storage)."
+        }
+      default:
+        return { title: "", timeComplexity: "", spaceComplexity: "", description: "" }
+    }
+  }
+
+  const { title, timeComplexity, spaceComplexity, description } = getAlgorithmExplanation()
+
   return (
       <div className="flex flex-col items-center h-screen">
-        <header className="bg-primary text-primary-foreground py-4 px-6  w-full">
-          <h1 className="text-2xl font-bold text-center">Algorithm Visualizer</h1>
+        <header className="bg-primary text-primary-foreground py-4 px-6 w-full">
+          <h1 className="text-4xl font-bold text-center">Algorithm Visualizer</h1>
         </header>
-        <div className="flex items-end justify-center min-w-max h-64 mt-10 shadow-2xl p-4">
+        <h1 className="text-3xl font-bold mt-8 capitalize">{currentAlgorithm} sort</h1>
+        <div className="flex items-end justify-center h-64 mt-10 shadow-2xl p-4">
           {array.map((value, index) => (
               <div
                   key={index}
                   className={`mx-0.5 ${isRunning ? 'bg-red-500' : 'bg-blue-500'}`}
-                  style={{height: `${value * 2}px`, width: '20px'}}
+                  style={{ height: `${value * 2}px`, width: '20px' }}
               ></div>
           ))}
         </div>
@@ -164,6 +272,8 @@ export default function Component() {
                 <DropdownMenuRadioItem value="bubble">Bubble Sort</DropdownMenuRadioItem>
                 <DropdownMenuRadioItem value="insertion">Insertion Sort</DropdownMenuRadioItem>
                 <DropdownMenuRadioItem value="merge">Merge Sort</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="heap">Heap Sort</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="quick">Quick Sort</DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -176,6 +286,20 @@ export default function Component() {
               min={5}
               max={100}
           />
+        </div>
+        <div className="mt-16 w-full max-w-xl">
+          <Card className="shadow-2xl">
+            <CardHeader>
+              <CardTitle className="underline mb-2">{title}</CardTitle>
+              <CardDescription>
+                <div>{timeComplexity}</div>
+                <div>{spaceComplexity}</div>
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-justify">{description}</p>
+            </CardContent>
+          </Card>
         </div>
       </div>
   )
