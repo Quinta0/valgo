@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "export": "next export",
-    "deploy": "next build && next export && touch out/.nojekyll && gh-pages -d out -t true"
+    "lint": "next lint"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.1",
