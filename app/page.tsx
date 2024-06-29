@@ -369,4 +369,3 @@ function ArrowUpDownIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export default ArrowUpDownIcon;
