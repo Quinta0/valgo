@@ -825,8 +825,8 @@ export default function Component() {
 
   const radixSort = async () => {
     let newArray = [...array];
-    const getMax = (arr) => Math.max(...arr);
-    const countingSortForRadix = async (arr, exp) => {
+    const getMax = (arr: number[]): number => Math.max(...arr);
+    const countingSortForRadix = async (arr: number[], exp: number): Promise<void> => {
       let output = new Array(arr.length).fill(0);
       let count = new Array(10).fill(0);
 
@@ -901,7 +901,7 @@ export default function Component() {
     const max = Math.max(...newArray);
     const bucketCount = Math.floor((max - min) / bucketSize) + 1;
 
-    let buckets = Array.from({ length: bucketCount }, () => []);
+    let buckets: number[][] = Array.from({ length: bucketCount }, () => []);
 
     for (let i = 0; i < newArray.length; i++) {
       if (await checkPauseAndStop()) return;
