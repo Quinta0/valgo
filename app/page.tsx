@@ -999,7 +999,7 @@ export default function Component() {
               <DropdownMenuContent>
                 <DropdownMenuRadioGroup
                     value={currentAlgorithm}
-                    onValueChange={(value: AlgorithmKey) => setCurrentAlgorithm(value)}
+                    onValueChange={(value) => setCurrentAlgorithm(value as AlgorithmKey)}
                 >
                   <DropdownMenuRadioItem value="bubble">Bubble Sort</DropdownMenuRadioItem>
                   <DropdownMenuRadioItem value="insertion">Insertion Sort</DropdownMenuRadioItem>
