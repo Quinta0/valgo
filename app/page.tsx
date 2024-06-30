@@ -327,6 +327,254 @@ const translations = {
       spaceComplexity: "Место: O(log n)",
       description: "Быстрая сортировка - это эффективный алгоритм сортировки, который использует подход разделяй и властвуй для сортировки элементов. Он работает, выбирая 'опорный' элемент из массива и разделяя другие элементы на два подмассива в зависимости от того, меньше они или больше опорного. Подмассивы затем сортируются рекурсивно."
     }
+  },
+  radix: {
+    en: {
+      title: "Radix Sort",
+      timeComplexity: "Time: O(nk) where n is the number of elements and k is the number of digits in the largest number",
+      spaceComplexity: "Space: O(n + k)",
+      description: "Radix Sort is a non-comparative sorting algorithm that sorts integers by processing individual digits. It processes each digit from the least significant to the most significant, using a stable counting sort to sort digits at each level."
+    },
+    fr: {
+      title: "Tri Radix",
+      timeComplexity: "Temps : O(nk) où n est le nombre d'éléments et k est le nombre de chiffres du plus grand nombre",
+      spaceComplexity: "Espace : O(n + k)",
+      description: "Le tri Radix est un algorithme de tri non comparatif qui trie les entiers en traitant les chiffres individuels. Il traite chaque chiffre du moins significatif au plus significatif, en utilisant un tri comptant stable pour trier les chiffres à chaque niveau."
+    },
+    it: {
+      title: "Radix Sort",
+      timeComplexity: "Tempo: O(nk) dove n è il numero di elementi e k è il numero di cifre nel numero più grande",
+      spaceComplexity: "Spazio: O(n + k)",
+      description: "Il Radix Sort è un algoritmo di ordinamento non comparativo che ordina gli interi elaborando le singole cifre. Elabora ciascuna cifra dal meno significativo al più significativo, utilizzando un ordinamento per conteggio stabile per ordinare le cifre a ciascun livello."
+    },
+    de: {
+      title: "Radix Sort",
+      timeComplexity: "Zeit: O(nk), wobei n die Anzahl der Elemente und k die Anzahl der Ziffern der größten Zahl ist",
+      spaceComplexity: "Platz: O(n + k)",
+      description: "Radix Sort ist ein nicht-vergleichender Sortieralgorithmus, der Ganzzahlen durch Verarbeitung einzelner Ziffern sortiert. Er verarbeitet jede Ziffer von der am wenigsten signifikanten zur am meisten signifikanten und verwendet ein stabiles Zählersortieren, um die Ziffern auf jeder Ebene zu sortieren."
+    },
+    es: {
+      title: "Radix Sort",
+      timeComplexity: "Tiempo: O(nk) donde n es el número de elementos y k es el número de dígitos en el número más grande",
+      spaceComplexity: "Espacio: O(n + k)",
+      description: "El Radix Sort es un algoritmo de ordenamiento no comparativo que ordena enteros procesando dígitos individuales. Procesa cada dígito desde el menos significativo hasta el más significativo, utilizando un conteo estable para ordenar los dígitos en cada nivel."
+    },
+    ja: {
+      title: "基数ソート",
+      timeComplexity: "時間: O(nk) ここで n は要素数、k は最大数の桁数",
+      spaceComplexity: "空間: O(n + k)",
+      description: "基数ソートは、個々の数字を処理することで整数をソートする非比較ソートアルゴリズムです。各桁を最下位から最上位まで処理し、安定したカウントソートを使用して各レベルの桁をソートします。"
+    },
+    no: {
+      title: "Radix Sort",
+      timeComplexity: "Tid: O(nk) der n er antall elementer og k er antall sifre i det største tallet",
+      spaceComplexity: "Plass: O(n + k)",
+      description: "Radix Sort er en ikke-sammenlignende sorteringsalgoritme som sorterer heltall ved å behandle individuelle sifre. Den behandler hvert siffer fra minst signifikant til mest signifikant, og bruker en stabil tellesortering for å sortere sifrene på hvert nivå."
+    },
+    sv: {
+      title: "Radix Sort",
+      timeComplexity: "Tid: O(nk) där n är antalet element och k är antalet siffror i det största numret",
+      spaceComplexity: "Utrymme: O(n + k)",
+      description: "Radix Sort är en icke-jämförande sorteringsalgoritm som sorterar heltal genom att bearbeta individuella siffror. Den bearbetar varje siffra från minst signifikant till mest signifikant, med en stabil räkningssortering för att sortera siffrorna på varje nivå."
+    },
+    uk: {
+      title: "Радикс Сортування",
+      timeComplexity: "Час: O(nk), де n - кількість елементів, а k - кількість цифр у найбільшому числі",
+      spaceComplexity: "Місце: O(n + k)",
+      description: "Радикс сортування - це алгоритм сортування без порівняння, який сортує цілі числа, обробляючи окремі цифри. Він обробляє кожну цифру від найменш значущої до найбільш значущої, використовуючи стабільне підрахункове сортування для сортування цифр на кожному рівні."
+    },
+    ru: {
+      title: "Поразрядная сортировка",
+      timeComplexity: "Время: O(nk), где n - количество элементов, а k - количество цифр в наибольшем числе",
+      spaceComplexity: "Место: O(n + k)",
+      description: "Поразрядная сортировка - это не сравнительный алгоритм сортировки, который сортирует целые числа путем обработки отдельных цифр. Он обрабатывает каждую цифру от наименее значимой до наиболее значимой, используя стабильную сортировку подсчетом для сортировки цифр на каждом уровне."
+    }
+  },
+  counting: {
+    en: {
+      title: "Counting Sort",
+      timeComplexity: "Time: O(n + k) where n is the number of elements and k is the range of the input",
+      spaceComplexity: "Space: O(k)",
+      description: "Counting Sort is a non-comparative sorting algorithm that works by counting the number of occurrences of each distinct element in the input. The count is then used to place the elements in the correct position in the output array."
+    },
+    fr: {
+      title: "Tri par dénombrement",
+      timeComplexity: "Temps : O(n + k) où n est le nombre d'éléments et k est la plage de l'entrée",
+      spaceComplexity: "Espace : O(k)",
+      description: "Le tri par dénombrement est un algorithme de tri non comparatif qui fonctionne en comptant le nombre d'occurrences de chaque élément distinct dans l'entrée. Le compte est ensuite utilisé pour placer les éléments dans la position correcte dans le tableau de sortie."
+    },
+    it: {
+      title: "Counting Sort",
+      timeComplexity: "Tempo: O(n + k) dove n è il numero di elementi e k è l'intervallo dell'input",
+      spaceComplexity: "Spazio: O(k)",
+      description: "Il Counting Sort è un algoritmo di ordinamento non comparativo che funziona contando il numero di occorrenze di ciascun elemento distinto nell'input. Il conteggio viene quindi utilizzato per posizionare gli elementi nella posizione corretta nell'array di output."
+    },
+    de: {
+      title: "Counting Sort",
+      timeComplexity: "Zeit: O(n + k), wobei n die Anzahl der Elemente und k der Bereich der Eingabe ist",
+      spaceComplexity: "Platz: O(k)",
+      description: "Counting Sort ist ein nicht-vergleichender Sortieralgorithmus, der funktioniert, indem die Anzahl der Vorkommen jedes einzelnen Elements in der Eingabe gezählt wird. Die Zählung wird dann verwendet, um die Elemente an der richtigen Position im Ausgabearray zu platzieren."
+    },
+    es: {
+      title: "Counting Sort",
+      timeComplexity: "Tiempo: O(n + k) donde n es el número de elementos y k es el rango de la entrada",
+      spaceComplexity: "Espacio: O(k)",
+      description: "Counting Sort es un algoritmo de ordenamiento no comparativo que funciona contando el número de ocurrencias de cada elemento distinto en la entrada. Luego, el conteo se utiliza para colocar los elementos en la posición correcta en la matriz de salida."
+    },
+    ja: {
+      title: "計数ソート",
+      timeComplexity: "時間: O(n + k) ここで n は要素数、k は入力範囲",
+      spaceComplexity: "空間: O(k)",
+      description: "計数ソートは、入力内の各異なる要素の出現回数をカウントすることで機能する非比較ソートアルゴリズムです。次に、カウントを使用して、要素を出力配列の正しい位置に配置します。"
+    },
+    no: {
+      title: "Counting Sort",
+      timeComplexity: "Tid: O(n + k) der n er antall elementer og k er området for inngangen",
+      spaceComplexity: "Plass: O(k)",
+      description: "Counting Sort er en ikke-sammenlignende sorteringsalgoritme som fungerer ved å telle antall forekomster av hvert distinkte element i inngangen. Deretter brukes tellingen til å plassere elementene i riktig posisjon i utgangsmatrisen."
+    },
+    sv: {
+      title: "Counting Sort",
+      timeComplexity: "Tid: O(n + k) där n är antalet element och k är inmatningsområdet",
+      spaceComplexity: "Utrymme: O(k)",
+      description: "Counting Sort är en icke-jämförande sorteringsalgoritm som fungerar genom att räkna antalet förekomster av varje distinkt element i ingången. Sedan används räkningen för att placera elementen i rätt position i utmatningsmatrisen."
+    },
+    uk: {
+      title: "Підрахункове сортування",
+      timeComplexity: "Час: O(n + k), де n - кількість елементів, а k - діапазон введення",
+      spaceComplexity: "Місце: O(k)",
+      description: "Підрахункове сортування - це алгоритм сортування без порівняння, який працює шляхом підрахунку кількості появ кожного окремого елемента у вхідних даних. Потім підрахунок використовується для розміщення елементів у правильній позиції у вихідному масиві."
+    },
+    ru: {
+      title: "Сортировка подсчетом",
+      timeComplexity: "Время: O(n + k), где n - количество элементов, а k - диапазон входных данных",
+      spaceComplexity: "Место: O(k)",
+      description: "Сортировка подсчетом - это не сравнительный алгоритм сортировки, который работает путем подсчета количества вхождений каждого отдельного элемента во входных данных. Затем подсчет используется для размещения элементов в правильной позиции в выходном массиве."
+    }
+  },
+  bucket: {
+    en: {
+      title: "Bucket Sort",
+      timeComplexity: "Time: O(n + k) where n is the number of elements and k is the number of buckets",
+      spaceComplexity: "Space: O(n + k)",
+      description: "Bucket Sort is a sorting algorithm that works by distributing the elements of an array into a number of buckets. Each bucket is then sorted individually, either using a different sorting algorithm or recursively applying the bucket sort."
+    },
+    fr: {
+      title: "Tri par compartiments",
+      timeComplexity: "Temps : O(n + k) où n est le nombre d'éléments et k est le nombre de compartiments",
+      spaceComplexity: "Espace : O(n + k)",
+      description: "Le tri par compartiments est un algorithme de tri qui fonctionne en distribuant les éléments d'un tableau dans un certain nombre de compartiments. Chaque compartiment est ensuite trié individuellement, soit en utilisant un autre algorithme de tri, soit en appliquant récursivement le tri par compartiments."
+    },
+    it: {
+      title: "Bucket Sort",
+      timeComplexity: "Tempo: O(n + k) dove n è il numero di elementi e k è il numero di bucket",
+      spaceComplexity: "Spazio: O(n + k)",
+      description: "Il Bucket Sort è un algoritmo di ordinamento che funziona distribuendo gli elementi di un array in un certo numero di bucket. Ogni bucket viene quindi ordinato singolarmente, utilizzando un altro algoritmo di ordinamento o applicando ricorsivamente il bucket sort."
+    },
+    de: {
+      title: "Bucket Sort",
+      timeComplexity: "Zeit: O(n + k), wobei n die Anzahl der Elemente und k die Anzahl der Buckets ist",
+      spaceComplexity: "Platz: O(n + k)",
+      description: "Bucket Sort ist ein Sortieralgorithmus, der funktioniert, indem die Elemente eines Arrays auf eine Anzahl von Buckets verteilt werden. Jeder Bucket wird dann einzeln sortiert, entweder unter Verwendung eines anderen Sortieralgorithmus oder durch rekursive Anwendung des Bucket-Sortiers."
+    },
+    es: {
+      title: "Bucket Sort",
+      timeComplexity: "Tiempo: O(n + k) donde n es el número de elementos y k es el número de cubetas",
+      spaceComplexity: "Espacio: O(n + k)",
+      description: "El Bucket Sort es un algoritmo de ordenamiento que funciona distribuyendo los elementos de un array en un número de cubetas. Cada cubeta se ordena individualmente, ya sea utilizando otro algoritmo de ordenamiento o aplicando recursivamente el bucket sort."
+    },
+    ja: {
+      title: "バケットソート",
+      timeComplexity: "時間: O(n + k) ここで n は要素数、k はバケットの数",
+      spaceComplexity: "空間: O(n + k)",
+      description: "バケットソートは、配列の要素を複数のバケットに分配することで機能するソートアルゴリズムです。各バケットは、他のソートアルゴリズムを使用するか、バケットソートを再帰的に適用して個別にソートされます。"
+    },
+    no: {
+      title: "Bucket Sort",
+      timeComplexity: "Tid: O(n + k) der n er antall elementer og k er antall bøtter",
+      spaceComplexity: "Plass: O(n + k)",
+      description: "Bucket Sort er en sorteringsalgoritme som fungerer ved å fordele elementene i en matrise i et antall bøtter. Hver bøtte sorteres deretter individuelt, enten ved å bruke en annen sorteringsalgoritme eller ved å bruke bucket sort rekursivt."
+    },
+    sv: {
+      title: "Bucket Sort",
+      timeComplexity: "Tid: O(n + k) där n är antalet element och k är antalet hinkar",
+      spaceComplexity: "Utrymme: O(n + k)",
+      description: "Bucket Sort är en sorteringsalgoritm som fungerar genom att distribuera elementen i en array i ett antal hinkar. Varje hink sorteras sedan individuellt, antingen med en annan sorteringsalgoritm eller genom att rekursivt tillämpa bucket sort."
+    },
+    uk: {
+      title: "Сортування по кошиках",
+      timeComplexity: "Час: O(n + k), де n - кількість елементів, а k - кількість кошиків",
+      spaceComplexity: "Місце: O(n + k)",
+      description: "Сортування по кошиках - це алгоритм сортування, який працює шляхом розподілу елементів масиву на кілька кошиків. Кожен кошик потім сортується окремо, або за допомогою іншого алгоритму сортування, або рекурсивно застосовуючи сортування по кошиках."
+    },
+    ru: {
+      title: "Сортировка по карманам",
+      timeComplexity: "Время: O(n + k), где n - количество элементов, а k - количество карманов",
+      spaceComplexity: "Место: O(n + k)",
+      description: "Сортировка по карманам - это алгоритм сортировки, который работает путем распределения элементов массива по ряду карманов. Каждый карман затем сортируется отдельно, либо с использованием другого алгоритма сортировки, либо рекурсивным применением сортировки по карманам."
+    }
+  },
+  shell: {
+    en: {
+      title: "Shell Sort",
+      timeComplexity: "Time: O(n^2) in the worst case, but can be much better with a good gap sequence",
+      spaceComplexity: "Space: O(1)",
+      description: "Shell Sort is an in-place comparison sort that generalizes insertion sort to allow the exchange of items that are far apart. The algorithm starts by sorting pairs of elements far apart from each other, then progressively reducing the gap between elements to be compared."
+    },
+    fr: {
+      title: "Tri de Shell",
+      timeComplexity: "Temps : O(n^2) dans le pire des cas, mais peut être bien meilleur avec une bonne séquence de gaps",
+      spaceComplexity: "Espace : O(1)",
+      description: "Le tri de Shell est un tri par comparaison en place qui généralise le tri par insertion pour permettre l'échange d'éléments éloignés les uns des autres. L'algorithme commence par trier des paires d'éléments éloignés les uns des autres, puis réduit progressivement l'écart entre les éléments à comparer."
+    },
+    it: {
+      title: "Shell Sort",
+      timeComplexity: "Tempo: O(n^2) nel peggiore dei casi, ma può essere molto migliore con una buona sequenza di gap",
+      spaceComplexity: "Spazio: O(1)",
+      description: "Il Shell Sort è un ordinamento in loco per confronto che generalizza l'ordinamento per inserzione per consentire lo scambio di elementi distanti tra loro. L'algoritmo inizia ordinando coppie di elementi distanti tra loro, quindi riduce progressivamente la distanza tra gli elementi da confrontare."
+    },
+    de: {
+      title: "Shell Sort",
+      timeComplexity: "Zeit: O(n^2) im schlimmsten Fall, kann aber mit einer guten Gap-Sequenz viel besser sein",
+      spaceComplexity: "Platz: O(1)",
+      description: "Shell Sort ist ein In-Place-Vergleichssortieralgorithmus, der den Insertionssort verallgemeinert, um den Austausch von Elementen zu ermöglichen, die weit voneinander entfernt sind. Der Algorithmus beginnt mit dem Sortieren von Paaren von Elementen, die weit voneinander entfernt sind, und reduziert dann nach und nach den Abstand zwischen den zu vergleichenden Elementen."
+    },
+    es: {
+      title: "Shell Sort",
+      timeComplexity: "Tiempo: O(n^2) en el peor de los casos, pero puede ser mucho mejor con una buena secuencia de intervalos",
+      spaceComplexity: "Espacio: O(1)",
+      description: "El Shell Sort es un ordenamiento in situ por comparación que generaliza el ordenamiento por inserción para permitir el intercambio de elementos que están muy separados. El algoritmo comienza ordenando pares de elementos muy separados entre sí, y luego reduce progresivamente el intervalo entre los elementos a comparar."
+    },
+    ja: {
+      title: "シェルソート",
+      timeComplexity: "時間: 最悪の場合 O(n^2) ですが、適切なギャップシーケンスを使用すると大幅に改善できます",
+      spaceComplexity: "空間: O(1)",
+      description: "シェルソートは、離れた項目の交換を可能にする挿入ソートを一般化したインプレース比較ソートです。このアルゴリズムは、互いに遠く離れた要素のペアをソートすることから始まり、比較する要素間のギャップを徐々に減らしていきます。"
+    },
+    no: {
+      title: "Shell Sort",
+      timeComplexity: "Tid: O(n^2) i verste fall, men kan være mye bedre med en god gapsekvens",
+      spaceComplexity: "Plass: O(1)",
+      description: "Shell Sort er en in-place sammenligningssortering som generaliserer innsettingssortering for å tillate bytte av elementer som er langt fra hverandre. Algoritmen starter med å sortere par av elementer langt fra hverandre, og reduserer deretter gradvis gapet mellom elementene som skal sammenlignes."
+    },
+    sv: {
+      title: "Shell Sort",
+      timeComplexity: "Tid: O(n^2) i värsta fall, men kan vara mycket bättre med en bra gapsekvens",
+      spaceComplexity: "Utrymme: O(1)",
+      description: "Shell Sort är en in-place-jämförelsesortering som generaliserar insättningssortering för att möjliggöra byte av objekt som är långt ifrån varandra. Algoritmen börjar med att sortera par av element långt ifrån varandra och minskar sedan successivt gapet mellan elementen som ska jämföras."
+    },
+    uk: {
+      title: "Сортування Шелла",
+      timeComplexity: "Час: O(n^2) у найгіршому випадку, але може бути набагато кращим із хорошою послідовністю проміжків",
+      spaceComplexity: "Місце: O(1)",
+      description: "Сортування Шелла - це порівняльне сортування на місці, яке узагальнює сортування вставками, щоб дозволити обмін елементами, які знаходяться далеко один від одного. Алгоритм починає з сортування пар елементів, які знаходяться далеко один від одного, а потім поступово зменшує проміжок між елементами для порівняння."
+    },
+    ru: {
+      title: "Сортировка Шелла",
+      timeComplexity: "Время: O(n^2) в худшем случае, но может быть намного лучше с хорошей последовательностью промежутков",
+      spaceComplexity: "Место: O(1)",
+      description: "Сортировка Шелла - это сортировка на месте методом сравнения, которая обобщает сортировку вставками, чтобы позволить обмен элементами, которые находятся далеко друг от друга. Алгоритм начинается с сортировки пар элементов, находящихся далеко друг от друга, затем постепенно уменьшает разрыв между сравниваемыми элементами."
+    }
   }
 };
 
@@ -374,6 +622,18 @@ export default function Component() {
         break
       case "quick":
         quickSort([...array], 0, array.length - 1)
+        break
+      case "radix":
+        radixSort()
+        break
+      case "counting":
+        countingSort()
+        break
+      case "bucket":
+        bucketSort()
+        break
+      case "shell":
+        shellSort()
         break
       default:
         break
@@ -563,6 +823,133 @@ export default function Component() {
     }
   }
 
+  const radixSort = async () => {
+    let newArray = [...array];
+    const getMax = (arr) => Math.max(...arr);
+    const countingSortForRadix = async (arr, exp) => {
+      let output = new Array(arr.length).fill(0);
+      let count = new Array(10).fill(0);
+
+      for (let i = 0; i < arr.length; i++) {
+        if (await checkPauseAndStop()) return;
+        count[Math.floor(arr[i] / exp) % 10]++;
+      }
+
+      for (let i = 1; i < 10; i++) count[i] += count[i - 1];
+
+      for (let i = arr.length - 1; i >= 0; i--) {
+        if (await checkPauseAndStop()) return;
+        output[count[Math.floor(arr[i] / exp) % 10] - 1] = arr[i];
+        count[Math.floor(arr[i] / exp) % 10]--;
+      }
+
+      for (let i = 0; i < arr.length; i++) {
+        arr[i] = output[i];
+        setArray([...arr]);
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      }
+    };
+
+    const max = getMax(newArray);
+
+    for (let exp = 1; Math.floor(max / exp) > 0; exp *= 10) {
+      if (await checkPauseAndStop()) return;
+      await countingSortForRadix(newArray, exp);
+    }
+
+    if (!stopRef.current) setIsRunning(false);
+  };
+
+  const countingSort = async () => {
+    let newArray = [...array];
+    const max = Math.max(...newArray);
+    const min = Math.min(...newArray);
+    const range = max - min + 1;
+
+    let count = new Array(range).fill(0);
+    let output = new Array(newArray.length).fill(0);
+
+    for (let i = 0; i < newArray.length; i++) {
+      if (await checkPauseAndStop()) return;
+      count[newArray[i] - min]++;
+    }
+
+    for (let i = 1; i < count.length; i++) {
+      count[i] += count[i - 1];
+    }
+
+    for (let i = newArray.length - 1; i >= 0; i--) {
+      if (await checkPauseAndStop()) return;
+      output[count[newArray[i] - min] - 1] = newArray[i];
+      count[newArray[i] - min]--;
+    }
+
+    for (let i = 0; i < newArray.length; i++) {
+      newArray[i] = output[i];
+      setArray([...newArray]);
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    }
+
+    if (!stopRef.current) setIsRunning(false);
+  };
+
+  const bucketSort = async () => {
+    const newArray = [...array];
+    const bucketSize = 5; // Customize bucket size
+
+    const min = Math.min(...newArray);
+    const max = Math.max(...newArray);
+    const bucketCount = Math.floor((max - min) / bucketSize) + 1;
+
+    let buckets = Array.from({ length: bucketCount }, () => []);
+
+    for (let i = 0; i < newArray.length; i++) {
+      if (await checkPauseAndStop()) return;
+      const bucketIndex = Math.floor((newArray[i] - min) / bucketSize);
+      buckets[bucketIndex].push(newArray[i]);
+    }
+
+    for (let i = 0; i < buckets.length; i++) {
+      if (await checkPauseAndStop()) return;
+      buckets[i].sort((a, b) => a - b);
+    }
+
+    let index = 0;
+    for (let i = 0; i < buckets.length; i++) {
+      for (let j = 0; j < buckets[i].length; j++) {
+        if (await checkPauseAndStop()) return;
+        newArray[index++] = buckets[i][j];
+        setArray([...newArray]);
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      }
+    }
+
+    if (!stopRef.current) setIsRunning(false);
+  };
+
+  const shellSort = async () => {
+    const newArray = [...array];
+    let n = newArray.length;
+
+    for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
+      for (let i = gap; i < n; i++) {
+        if (await checkPauseAndStop()) return;
+        let temp = newArray[i];
+        let j;
+        for (j = i; j >= gap && newArray[j - gap] > temp; j -= gap) {
+          newArray[j] = newArray[j - gap];
+          setArray([...newArray]);
+          await new Promise((resolve) => setTimeout(resolve, 50));
+        }
+        newArray[j] = temp;
+        setArray([...newArray]);
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      }
+    }
+
+    if (!stopRef.current) setIsRunning(false);
+  };
+
   const getAlgorithmExplanation = () => {
     return translations[currentAlgorithm][selectedLanguage] || translations[currentAlgorithm]['en'];
   }
@@ -605,6 +992,10 @@ export default function Component() {
                   <DropdownMenuRadioItem value="merge">Merge Sort</DropdownMenuRadioItem>
                   <DropdownMenuRadioItem value="heap">Heap Sort</DropdownMenuRadioItem>
                   <DropdownMenuRadioItem value="quick">Quick Sort</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="radix">Radix Sort</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="counting">Counting Sort</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="bucket">Bucket Sort</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="shell">Shell Sort</DropdownMenuRadioItem>
                 </DropdownMenuRadioGroup>
               </DropdownMenuContent>
             </DropdownMenu>
