@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useRef } from "react";
 import React from 'react';
-import { Button } from "../components/ui/button"
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "../components/ui/dropdown-menu"
-import { Slider } from "../components/ui/slider"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/card"
+import { Button } from "../components/ui/button";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "../components/ui/dropdown-menu";
+import { Slider } from "../components/ui/slider";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -13,10 +13,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 
-type LanguageCode = 'en' | 'fr' | 'it' | 'de' | 'es' | 'ja' | 'no' | 'sv' | 'uk' | 'ru';
-type AlgorithmKey = 'bubble' | 'insertion' | 'heap' | 'quick' | 'merge' | 'radix' | 'counting' | 'bucket' | 'shell';
+type AlgorithmKey = "bubble" | "insertion" | "heap" | "quick" | "merge" | "radix" | "counting" | "bucket" | "shell";
+type LanguageCode = "en" | "fr" | "it" | "de" | "es" | "ja" | "no" | "sv" | "uk" | "ru";
+
+const languages: LanguageCode[] = ['en', 'fr', 'it', 'de', 'es', 'ja', 'no', 'sv', 'uk', 'ru'];
 
 interface AlgorithmDescription {
   title: string;
@@ -31,9 +33,7 @@ type Translations = {
   };
 };
 
-const languages: LanguageCode[] = ['en', 'fr', 'it', 'de', 'es', 'ja', 'no', 'sv', 'uk', 'ru'];
-
-const translations = {
+const translations: Translations = {
   bubble: {
     en: {
       title: "Bubble Sort",
@@ -594,14 +594,12 @@ const translations = {
   }
 };
 
-
-
 export default function Component() {
   const [array, setArray] = useState<number[]>([])
   const [isRunning, setIsRunning] = useState(false)
-  const [currentAlgorithm, setCurrentAlgorithm] = useState("bubble")
+  const [currentAlgorithm, setCurrentAlgorithm] = useState<AlgorithmKey>("bubble")
   const [arraySize, setArraySize] = useState(20)
-  const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageCode>('en');
   const pauseRef = useRef(false)
   const stopRef = useRef(false)
 
@@ -984,7 +982,7 @@ export default function Component() {
                 <div
                     key={index}
                     className={`mx-0.5 ${isRunning ? 'bg-red-500' : 'bg-blue-500'}`}
-                    style={{height: `${value * 2}px`, width: '20px'}}
+                    style={{ height: `${value * 2}px`, width: '20px' }}
                 ></div>
             ))}
           </div>
@@ -1001,7 +999,7 @@ export default function Component() {
               <DropdownMenuContent>
                 <DropdownMenuRadioGroup
                     value={currentAlgorithm}
-                    onValueChange={setCurrentAlgorithm}
+                    onValueChange={(value: AlgorithmKey) => setCurrentAlgorithm(value)}
                 >
                   <DropdownMenuRadioItem value="bubble">Bubble Sort</DropdownMenuRadioItem>
                   <DropdownMenuRadioItem value="insertion">Insertion Sort</DropdownMenuRadioItem>
@@ -1039,7 +1037,6 @@ export default function Component() {
               </CardContent>
             </Card>
           </div>
-
         </div>
         <footer className="bg-muted text-muted-foreground py-6">
           <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
@@ -1052,7 +1049,7 @@ export default function Component() {
                 <DropdownMenuContent>
                   <DropdownMenuRadioGroup
                       value={selectedLanguage}
-                      onValueChange={(value) => setSelectedLanguage(value)}
+                      onValueChange={(value: LanguageCode) => setSelectedLanguage(value)}
                   >
                     {languages.map((lang) => (
                         <DropdownMenuRadioItem key={lang} value={lang}>
@@ -1094,17 +1091,16 @@ export default function Component() {
                   </DialogHeader>
                 </DialogContent>
               </Dialog>
-
               <a href="https://github.com/Quinta0" target="_blank" rel="noopener noreferrer"
                  className="hover:underline">
-                <GitHubIcon className="w-6 h-6"/>
+                <GitHubIcon className="w-6 h-6" />
               </a>
               <a href="mailto:0pietroquintavalle0@gmail.com" className="hover:underline">
-                <GmailIcon className="w-6 h-6"/>
+                <GmailIcon className="w-6 h-6" />
               </a>
               <a href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/" target="_blank"
                  rel="noopener noreferrer" className="hover:underline">
-                <LinkedInIcon className="w-6 h-6"/>
+                <LinkedInIcon className="w-6 h-6" />
               </a>
             </nav>
           </div>
@@ -1179,3 +1175,4 @@ function LinkedInIcon(props: React.SVGProps<SVGSVGElement>) {
       </svg>
   )
 }
+
