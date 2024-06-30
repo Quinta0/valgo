@@ -292,11 +292,11 @@ export default function Component() {
   return (
     <>
       <div className="flex flex-col items-center h-screen">
-        <header className="bg-primary text-primary-foreground py-4 px-6 w-full">
+        <header className="bg-primary text-primary-foreground py-4 px-6 w-full ">
           <h1 className="text-4xl font-bold text-center">Algorithm Visualizer</h1>
         </header>
         <h1 className="text-3xl font-bold mt-8 capitalize">{currentAlgorithm} sort</h1>
-        <div className="flex items-end justify-center h-64 mt-10 shadow-2xl p-4">
+        <div className="flex items-end justify-center h-64 mt-10 shadow-2xl p-4 max-w-full">
           {array.map((value, index) => (
               <div
                   key={index}
