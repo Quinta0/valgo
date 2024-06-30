@@ -1,5 +1,7 @@
 # VALGO
 
+![VALGO](image.png)
+
 ## 📊 Live Demo
 Check out the live demo [here](https://quinta0.github.io/valgo/).
 
