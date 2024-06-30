@@ -15,7 +15,23 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
-const languages = ['en', 'fr', 'it', 'de', 'es', 'ja', 'no', 'sv', 'uk', 'ru'];
+type LanguageCode = 'en' | 'fr' | 'it' | 'de' | 'es' | 'ja' | 'no' | 'sv' | 'uk' | 'ru';
+type AlgorithmKey = 'bubble' | 'insertion' | 'heap' | 'quick' | 'merge' | 'radix' | 'counting' | 'bucket' | 'shell';
+
+interface AlgorithmDescription {
+  title: string;
+  timeComplexity: string;
+  spaceComplexity: string;
+  description: string;
+}
+
+type Translations = {
+  [key in AlgorithmKey]: {
+    [lang in LanguageCode]: AlgorithmDescription;
+  };
+};
+
+const languages: LanguageCode[] = ['en', 'fr', 'it', 'de', 'es', 'ja', 'no', 'sv', 'uk', 'ru'];
 
 const translations = {
   bubble: {
