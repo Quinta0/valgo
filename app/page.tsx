@@ -1049,7 +1049,7 @@ export default function Component() {
                 <DropdownMenuContent>
                   <DropdownMenuRadioGroup
                       value={selectedLanguage}
-                      onValueChange={(value: LanguageCode) => setSelectedLanguage(value)}
+                      onValueChange={(value) => setSelectedLanguage(value as LanguageCode)}
                   >
                     {languages.map((lang) => (
                         <DropdownMenuRadioItem key={lang} value={lang}>
@@ -1106,7 +1106,7 @@ export default function Component() {
           </div>
         </footer>
       </>
-  )
+  );
 }
 
 function ArrowUpDownIcon(props: React.SVGProps<SVGSVGElement>) {
