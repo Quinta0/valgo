@@ -431,7 +431,7 @@ function ArrowUpDownIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function GitHubIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
+function GitHubIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
       <svg
           {...props}
@@ -446,7 +446,7 @@ function GitHubIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   )
 }
 
-function GmailIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
+function GmailIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
       <svg
           {...props}
@@ -461,7 +461,7 @@ function GmailIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   )
 }
 
-function LinkedInIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
+function LinkedInIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
       <svg
           {...props}
