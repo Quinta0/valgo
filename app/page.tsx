@@ -82,7 +82,7 @@ export default function Component() {
       await new Promise(resolve => {
         const check = () => {
           if (pauseRef.current && !stopRef.current) {
-            setTimeout(check, 100)
+            setTimeout(check, 50)
           } else {
             resolve(null)
           }
@@ -101,7 +101,7 @@ export default function Component() {
         if (newArray[j] > newArray[j + 1]) {
           [newArray[j], newArray[j + 1]] = [newArray[j + 1], newArray[j]]
           setArray([...newArray])
-          await new Promise((resolve) => setTimeout(resolve, 100))
+          await new Promise((resolve) => setTimeout(resolve, 50))
         }
       }
     }
@@ -119,11 +119,11 @@ export default function Component() {
         newArray[j + 1] = newArray[j]
         j = j - 1
         setArray([...newArray])
-        await new Promise((resolve) => setTimeout(resolve, 100))
+        await new Promise((resolve) => setTimeout(resolve, 50))
       }
       newArray[j + 1] = key
       setArray([...newArray])
-      await new Promise((resolve) => setTimeout(resolve, 100))
+      await new Promise((resolve) => setTimeout(resolve, 50))
     }
     if (!stopRef.current) setIsRunning(false)
   }
@@ -140,7 +140,7 @@ export default function Component() {
     if (largest !== i) {
       [newArray[i], newArray[largest]] = [newArray[largest], newArray[i]]
       setArray([...newArray])
-      await new Promise((resolve) => setTimeout(resolve, 100))
+      await new Promise((resolve) => setTimeout(resolve, 50))
       await heapify(newArray, n, largest)
     }
   }
@@ -156,7 +156,7 @@ export default function Component() {
       if (await checkPauseAndStop()) return
       [newArray[0], newArray[i]] = [newArray[i], newArray[0]]
       setArray([...newArray])
-      await new Promise((resolve) => setTimeout(resolve, 100))
+      await new Promise((resolve) => setTimeout(resolve, 50))
       await heapify(newArray, i, 0)
     }
     if (!stopRef.current) setIsRunning(false)
@@ -172,12 +172,12 @@ export default function Component() {
         i++
         [arr[i], arr[j]] = [arr[j], arr[i]]
         setArray([...arr])
-        await new Promise((resolve) => setTimeout(resolve, 100))
+        await new Promise((resolve) => setTimeout(resolve, 50))
       }
     }
     [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]]
     setArray([...arr])
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    await new Promise((resolve) => setTimeout(resolve, 50))
     return i + 1
   }
 
@@ -222,7 +222,7 @@ export default function Component() {
         j++
       }
       setArray([...arr])
-      await new Promise((resolve) => setTimeout(resolve, 100))
+      await new Promise((resolve) => setTimeout(resolve, 50))
       k++
     }
 
@@ -232,7 +232,7 @@ export default function Component() {
       i++
       k++
       setArray([...arr])
-      await new Promise((resolve) => setTimeout(resolve, 100))
+      await new Promise((resolve) => setTimeout(resolve, 50))
     }
 
     while (j < n2) {
@@ -241,7 +241,7 @@ export default function Component() {
       j++
       k++
       setArray([...arr])
-      await new Promise((resolve) => setTimeout(resolve, 100))
+      await new Promise((resolve) => setTimeout(resolve, 50))
     }
   }
 
