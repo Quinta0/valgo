@@ -16,9 +16,9 @@ import {
 } from "@/components/ui/dialog";
 
 type AlgorithmKey = "bubble" | "insertion" | "heap" | "quick" | "merge" | "radix" | "counting" | "bucket" | "shell";
-type LanguageCode = "en" | "fr" | "it" | "de" | "es" | "ja" | "no" | "sv" | "uk" | "ru";
+type LanguageCode = "en" | "fr" | "it" | "de" | "es" | "ja" | "no" | "sv" | "ua" | "ru";
 
-const languages: LanguageCode[] = ['en', 'fr', 'it', 'de', 'es', 'ja', 'no', 'sv', 'uk', 'ru'];
+const languages: LanguageCode[] = ['en', 'fr', 'it', 'de', 'es', 'ja', 'no', 'sv', 'ua', 'ru'];
 
 interface AlgorithmDescription {
   title: string;
@@ -83,7 +83,7 @@ const translations: Translations = {
       spaceComplexity: "Utrymme: O(1)",
       description: "Bubble sort är en enkel sorteringsalgoritm som upprepade gånger går igenom listan, jämför intilliggande element och byter dem om de är i fel ordning. Genomgången av listan upprepas tills listan är sorterad."
     },
-    uk: {
+    ua: {
       title: "Bubble Sort",
       timeComplexity: "Час: O(n^2)",
       spaceComplexity: "Місце: O(1)",
@@ -145,7 +145,7 @@ const translations: Translations = {
       spaceComplexity: "Utrymme: O(1)",
       description: "Insertion sort är en enkel sorteringsalgoritm som bygger den slutgiltiga sorterade matrisen ett element i taget. Det är mycket mindre effektivt på stora listor än mer avancerade algoritmer som quicksort, heapsort eller mergesort."
     },
-    uk: {
+    ua: {
       title: "Insertion Sort",
       timeComplexity: "Час: O(n^2)",
       spaceComplexity: "Місце: O(1)",
@@ -207,7 +207,7 @@ const translations: Translations = {
       spaceComplexity: "Utrymme: O(n)",
       description: "Merge sort är en effektiv, stabil och jämförelsebaserad sorteringsalgoritm. De flesta implementationer producerar en stabil sortering, vilket betyder att ordningen på lika element är densamma i input och output. Det fungerar genom att rekursivt dela upp listan i två halvor, sortera varje halv och sedan slå ihop de sorterade halvorna."
     },
-    uk: {
+    ua: {
       title: "Merge Sort",
       timeComplexity: "Час: O(n log n)",
       spaceComplexity: "Місце: O(n)",
@@ -269,7 +269,7 @@ const translations: Translations = {
       spaceComplexity: "Utrymme: O(1)",
       description: "Heap sort är en jämförelsebaserad sorteringsalgoritm som använder en binär heap-datastruktur. Den delar upp sin input i en sorterad och en osorterad region, och krymper iterativt den osorterade regionen genom att extrahera det största elementet och flytta det till den sorterade regionen."
     },
-    uk: {
+    ua: {
       title: "Heap Sort",
       timeComplexity: "Час: O(n log n)",
       spaceComplexity: "Місце: O(1)",
@@ -331,7 +331,7 @@ const translations: Translations = {
       spaceComplexity: "Utrymme: O(log n)",
       description: "Quick sort är en effektiv sorteringsalgoritm som använder en dela-och-härska-metod för att sortera element. Det fungerar genom att välja ett 'pivot'-element från matrisen och partitionera de andra elementen i två underarrayer beroende på om de är mindre än eller större än pivot. Underarrayerna sorteras sedan rekursivt."
     },
-    uk: {
+    ua: {
       title: "Quick Sort",
       timeComplexity: "Час: O(n log n) в середньому, O(n^2) в гіршому випадку",
       spaceComplexity: "Місце: O(log n)",
@@ -393,7 +393,7 @@ const translations: Translations = {
       spaceComplexity: "Utrymme: O(n + k)",
       description: "Radix Sort är en icke-jämförande sorteringsalgoritm som sorterar heltal genom att bearbeta individuella siffror. Den bearbetar varje siffra från minst signifikant till mest signifikant, med en stabil räkningssortering för att sortera siffrorna på varje nivå."
     },
-    uk: {
+    ua: {
       title: "Радикс Сортування",
       timeComplexity: "Час: O(nk), де n - кількість елементів, а k - кількість цифр у найбільшому числі",
       spaceComplexity: "Місце: O(n + k)",
@@ -455,7 +455,7 @@ const translations: Translations = {
       spaceComplexity: "Utrymme: O(k)",
       description: "Counting Sort är en icke-jämförande sorteringsalgoritm som fungerar genom att räkna antalet förekomster av varje distinkt element i ingången. Sedan används räkningen för att placera elementen i rätt position i utmatningsmatrisen."
     },
-    uk: {
+    ua: {
       title: "Підрахункове сортування",
       timeComplexity: "Час: O(n + k), де n - кількість елементів, а k - діапазон введення",
       spaceComplexity: "Місце: O(k)",
@@ -517,7 +517,7 @@ const translations: Translations = {
       spaceComplexity: "Utrymme: O(n + k)",
       description: "Bucket Sort är en sorteringsalgoritm som fungerar genom att distribuera elementen i en array i ett antal hinkar. Varje hink sorteras sedan individuellt, antingen med en annan sorteringsalgoritm eller genom att rekursivt tillämpa bucket sort."
     },
-    uk: {
+    ua: {
       title: "Сортування по кошиках",
       timeComplexity: "Час: O(n + k), де n - кількість елементів, а k - кількість кошиків",
       spaceComplexity: "Місце: O(n + k)",
@@ -579,7 +579,7 @@ const translations: Translations = {
       spaceComplexity: "Utrymme: O(1)",
       description: "Shell Sort är en in-place-jämförelsesortering som generaliserar insättningssortering för att möjliggöra byte av objekt som är långt ifrån varandra. Algoritmen börjar med att sortera par av element långt ifrån varandra och minskar sedan successivt gapet mellan elementen som ska jämföras."
     },
-    uk: {
+    ua: {
       title: "Сортування Шелла",
       timeComplexity: "Час: O(n^2) у найгіршому випадку, але може бути набагато кращим із хорошою послідовністю проміжків",
       spaceComplexity: "Місце: O(1)",
