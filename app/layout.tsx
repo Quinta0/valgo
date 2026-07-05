@@ -1,13 +1,24 @@
 import { ReactNode } from 'react';
-import { DM_Sans, Space_Mono } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import './globals.css';
 
-const fontHeading = DM_Sans({
+const fontSans = Inter({
     subsets: ['latin'],
     display: 'swap',
-    variable: '--font-heading',
+    variable: '--font-sans',
 });
+
+const fontMono = JetBrains_Mono({
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-mono',
+});
+
+export const metadata = {
+    title: 'Valgo — Watch how sorting actually works',
+    description: 'An animated, narrated visualizer for nine classic sorting algorithms.',
+};
 
 type LayoutProps = {
     children: ReactNode;
@@ -15,11 +26,12 @@ type LayoutProps = {
 
 export default function Layout({ children }: LayoutProps) {
     return (
-        <html lang="en">
+        <html lang="en" className="dark">
         <body
             className={cn(
-                'antialiased',
-                fontHeading.variable
+                'antialiased font-sans',
+                fontSans.variable,
+                fontMono.variable
             )}
         >
         {children}

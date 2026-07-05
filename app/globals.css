@@ -4,26 +4,38 @@
 
 @layer base {
   :root {
-    --background: 36 39% 88%;
-    --foreground: 36 45% 15%;
-    --primary: 36 45% 70%;
-    --primary-foreground: 36 45% 11%;
-    --secondary: 40 35% 77%;
-    --secondary-foreground: 36 45% 25%;
-    --accent: 36 64% 57%;
-    --accent-foreground: 36 72% 17%;
-    --destructive: 0 84% 37%;
-    --destructive-foreground: 0 0% 98%;
-    --muted: 36 33% 75%;
-    --muted-foreground: 36 45% 25%;
-    --card: 36 46% 82%;
-    --card-foreground: 36 45% 20%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --border: 36 45% 60%;
-    --input: 36 45% 60%;
-    --ring: 36 45% 30%;
-    --radius: 0rem;
+    /* 3blue1brown-inspired dark palette: deep space blue background,
+       a warm gold accent for emphasis, and a small, deliberate set of
+       "state" colors used consistently across every visualization. */
+    --background: 222 47% 7%;
+    --foreground: 210 40% 96%;
+
+    --primary: 199 89% 64%;          /* 3b1b sky blue */
+    --primary-foreground: 222 47% 7%;
+    --secondary: 222 30% 16%;
+    --secondary-foreground: 210 40% 90%;
+    --accent: 43 96% 62%;            /* warm gold, used sparingly */
+    --accent-foreground: 222 47% 7%;
+    --destructive: 358 75% 59%;
+    --destructive-foreground: 210 40% 96%;
+    --muted: 222 25% 14%;
+    --muted-foreground: 215 20% 65%;
+    --card: 222 40% 10%;
+    --card-foreground: 210 40% 96%;
+    --popover: 222 44% 9%;
+    --popover-foreground: 210 40% 96%;
+    --border: 222 25% 20%;
+    --input: 222 25% 20%;
+    --ring: 199 89% 64%;
+    --radius: 0.75rem;
+
+    /* Algorithm state colors — one meaning each, used everywhere. */
+    --state-idle: 199 60% 55%;
+    --state-compare: 43 96% 62%;
+    --state-swap: 358 75% 59%;
+    --state-sorted: 152 60% 50%;
+    --state-pivot: 271 76% 68%;
+    --state-active-range: 199 89% 64%;
   }
 }
 
@@ -34,9 +46,42 @@
 
   body {
     @apply bg-background text-foreground;
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.35) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.35) 1px, transparent 1px);
+    background-size: 44px 44px;
+    background-position: center -1px;
   }
 
-  /*h1, h2, h3, h4, h5, h6 {*/
-  /*  @apply font-heading;*/
-  /*}*/
+  ::selection {
+    background: hsl(var(--accent) / 0.35);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 999px;
+  }
+}
+
+@layer utilities {
+  .glow-primary {
+    box-shadow: 0 0 24px hsl(var(--primary) / 0.35);
+  }
+  .glow-accent {
+    box-shadow: 0 0 24px hsl(var(--accent) / 0.35);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .bg-grid-fade {
+    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+  }
 }
