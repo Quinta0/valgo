@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Panel from "@/components/Panel";
 
 interface NarrationProps {
     text: string;
@@ -10,7 +11,7 @@ interface NarrationProps {
 
 export default function Narration({ text, stepIndex, title }: NarrationProps) {
     return (
-        <div className="rounded-xl border border-border bg-card/60 backdrop-blur-sm p-5">
+        <Panel>
             <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">{title}</p>
             <div className="min-h-[3.5rem]">
                 <AnimatePresence mode="wait">
@@ -26,6 +27,6 @@ export default function Narration({ text, stepIndex, title }: NarrationProps) {
                     </motion.p>
                 </AnimatePresence>
             </div>
-        </div>
+        </Panel>
     );
 }

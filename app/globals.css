@@ -4,38 +4,37 @@
 
 @layer base {
   :root {
-    /* 3blue1brown-inspired dark palette: deep space blue background,
-       a warm gold accent for emphasis, and a small, deliberate set of
-       "state" colors used consistently across every visualization. */
-    --background: 222 47% 7%;
-    --foreground: 210 40% 96%;
+    /* Monochrome chrome: the shell carries no color of its own, so the
+       five algorithm-state colors below are the only color on the page. */
+    --background: 224 15% 6%;
+    --foreground: 210 20% 95%;
 
-    --primary: 199 89% 64%;          /* 3b1b sky blue */
-    --primary-foreground: 222 47% 7%;
-    --secondary: 222 30% 16%;
-    --secondary-foreground: 210 40% 90%;
-    --accent: 43 96% 62%;            /* warm gold, used sparingly */
-    --accent-foreground: 222 47% 7%;
-    --destructive: 358 75% 59%;
-    --destructive-foreground: 210 40% 96%;
-    --muted: 222 25% 14%;
-    --muted-foreground: 215 20% 65%;
-    --card: 222 40% 10%;
-    --card-foreground: 210 40% 96%;
-    --popover: 222 44% 9%;
-    --popover-foreground: 210 40% 96%;
-    --border: 222 25% 20%;
-    --input: 222 25% 20%;
-    --ring: 199 89% 64%;
+    --primary: 210 25% 96%;          /* near-white, inverted CTA fill */
+    --primary-foreground: 224 20% 9%;
+    --secondary: 224 12% 15%;
+    --secondary-foreground: 210 15% 90%;
+    --accent: 224 12% 17%;           /* neutral hover surface, not a brand color */
+    --accent-foreground: 210 20% 95%;
+    --destructive: 358 65% 55%;
+    --destructive-foreground: 210 20% 96%;
+    --muted: 224 12% 13%;
+    --muted-foreground: 216 10% 62%;
+    --card: 224 14% 9%;
+    --card-foreground: 210 20% 95%;
+    --popover: 224 16% 8%;
+    --popover-foreground: 210 20% 95%;
+    --border: 224 12% 18%;
+    --input: 224 12% 18%;
+    --ring: 205 90% 62%;             /* the one deliberate accent: focus only */
     --radius: 0.75rem;
 
     /* Algorithm state colors — one meaning each, used everywhere. */
-    --state-idle: 199 60% 55%;
-    --state-compare: 43 96% 62%;
+    --state-idle: 205 40% 50%;
+    --state-compare: 43 90% 60%;
     --state-swap: 358 75% 59%;
-    --state-sorted: 152 60% 50%;
-    --state-pivot: 271 76% 68%;
-    --state-active-range: 199 89% 64%;
+    --state-sorted: 152 55% 48%;
+    --state-pivot: 271 70% 66%;
+    --state-active-range: 205 60% 55%;
   }
 }
 
@@ -71,12 +70,6 @@
 }
 
 @layer utilities {
-  .glow-primary {
-    box-shadow: 0 0 24px hsl(var(--primary) / 0.35);
-  }
-  .glow-accent {
-    box-shadow: 0 0 24px hsl(var(--accent) / 0.35);
-  }
   .text-balance {
     text-wrap: balance;
   }

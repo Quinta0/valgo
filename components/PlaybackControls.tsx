@@ -3,6 +3,7 @@
 import { Play, Pause, Shuffle, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
+import Panel from "@/components/Panel";
 
 export type Speed = "slow" | "normal" | "fast" | "turbo";
 
@@ -38,7 +39,7 @@ export default function PlaybackControls({
     };
 
     return (
-        <div className="rounded-xl border border-border bg-card/60 backdrop-blur-sm p-5 space-y-5">
+        <Panel className="space-y-5">
             <div className="flex flex-wrap items-center gap-2">
                 <Button onClick={onTogglePlay} size="lg" className="gap-2 min-w-[112px]">
                     {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
@@ -95,6 +96,6 @@ export default function PlaybackControls({
                     disabled={disabled}
                 />
             </div>
-        </div>
+        </Panel>
     );
 }

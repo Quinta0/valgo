@@ -14,7 +14,7 @@ import StatsPanel from "@/components/StatsPanel";
 import PlaybackControls, { Speed } from "@/components/PlaybackControls";
 import { AlgorithmPicker } from "@/components/Pickers";
 import SiteFooter from "@/components/SiteFooter";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import Panel from "@/components/Panel";
 
 const SPEED_MS: Record<Speed, number> = { slow: 260, normal: 120, fast: 55, turbo: 18 };
 
@@ -22,17 +22,38 @@ function randomArray(size: number): number[] {
     return Array.from({ length: size }, () => Math.floor(Math.random() * 100) + 1);
 }
 
+// Deterministic so the server-rendered array matches the client's first
+// render; the real random array is generated client-side after mount.
+function seededArray(size: number): number[] {
+    return Array.from({ length: size }, (_, i) => ((i * 37) % 100) + 1);
+}
+
+function BrandMark(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg viewBox="0 0 20 20" fill="none" {...props}>
+            <rect x="2" y="11" width="4" height="7" rx="1" fill="currentColor" opacity="0.5" />
+            <rect x="8" y="6" width="4" height="12" rx="1" fill="currentColor" opacity="0.75" />
+            <rect x="14" y="2" width="4" height="16" rx="1" fill="currentColor" />
+        </svg>
+    );
+}
+
 export default function Page() {
     const [algorithm, setAlgorithm] = useState<AlgorithmKey>("bubble");
     const [language, setLanguage] = useState<LanguageCode>("en");
     const [arraySize, setArraySize] = useState(24);
-    const [baseArray, setBaseArray] = useState<number[]>(() => randomArray(24));
+    const [baseArray, setBaseArray] = useState<number[]>(() => seededArray(24));
     const [steps, setSteps] = useState<Step[]>([]);
     const [stepIndex, setStepIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const [speed, setSpeed] = useState<Speed>("normal");
 
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    useEffect(() => {
+        setBaseArray(randomArray(arraySize));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // (Re)compute the full step-by-step story whenever the algorithm or the
     // underlying data changes. Everything downstream just plays it back.
@@ -111,94 +132,95 @@ export default function Page() {
 
     return (
         <div className="min-h-screen flex flex-col">
-            <header className="border-b border-border bg-card/30 backdrop-blur-sm">
-                <div className="container mx-auto px-4 md:px-6 py-6 flex flex-wrap items-center justify-between gap-4">
-                    <div>
-                        <h1 className="text-2xl font-bold tracking-tight">
-                            <span className="text-primary">{t(language, "brand")}</span>
-                        </h1>
-                        <p className="text-sm text-muted-foreground">{t(language, "tagline")}</p>
+            <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
+                <div className="container mx-auto max-w-6xl px-4 md:px-6 h-16 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                        <BrandMark className="h-5 w-5 shrink-0 text-foreground" />
+                        <h1 className="text-base font-semibold tracking-tight truncate">{t(language, "brand")}</h1>
+                        <span className="hidden md:inline text-sm text-muted-foreground ml-2 pl-3 border-l border-border truncate">
+                            {t(language, "tagline")}
+                        </span>
                     </div>
                     <AlgorithmPicker value={algorithm} onChange={setAlgorithm} triggerLabel={t(language, "pickAlgorithm")} />
                 </div>
             </header>
 
-            <main className="flex-1 container mx-auto px-4 md:px-6 py-10 space-y-8">
-                <motion.div
+            <main className="flex-1">
+                <motion.section
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="rounded-xl border border-border bg-card/60 backdrop-blur-sm p-6"
+                    className="border-b border-border bg-card/30"
                 >
-                    <Bars
-                        values={currentStep?.array ?? baseArray}
-                        indices={currentStep?.indices ?? []}
-                        action={currentStep?.action}
-                        sorted={currentStep?.sorted ?? []}
-                        range={currentStep?.range}
-                        pivotIndex={pivotIndex}
-                        stepDurationMs={SPEED_MS[speed]}
-                    />
-                </motion.div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div className="lg:col-span-2 space-y-6">
-                        <Narration text={narration} stepIndex={stepIndex} title={t(language, "narrationTitle")} />
-                        <PlaybackControls
-                            isPlaying={isPlaying}
-                            onTogglePlay={handleTogglePlay}
-                            onShuffle={handleShuffle}
-                            onReset={handleReset}
-                            arraySize={arraySize}
-                            onArraySizeChange={handleArraySizeChange}
-                            speed={speed}
-                            onSpeedChange={setSpeed}
-                            stepIndex={stepIndex}
-                            stepCount={Math.max(steps.length - 1, 0)}
-                            onScrub={handleScrub}
-                            labels={{
-                                play: t(language, "play"), pause: t(language, "pause"),
-                                shuffle: t(language, "shuffle"), reset: t(language, "reset"),
-                                arraySize: t(language, "arraySize"), elements: t(language, "elements"),
-                                speed: t(language, "speed"), speedSlow: t(language, "speedSlow"),
-                                speedNormal: t(language, "speedNormal"), speedFast: t(language, "speedFast"),
-                                speedTurbo: t(language, "speedTurbo"),
-                            }}
+                    <div className="container mx-auto max-w-6xl px-4 md:px-6 py-8 md:py-10">
+                        <Bars
+                            values={currentStep?.array ?? baseArray}
+                            indices={currentStep?.indices ?? []}
+                            action={currentStep?.action}
+                            sorted={currentStep?.sorted ?? []}
+                            range={currentStep?.range}
+                            pivotIndex={pivotIndex}
+                            stepDurationMs={SPEED_MS[speed]}
                         />
                     </div>
+                </motion.section>
 
-                    <div className="space-y-6">
-                        <StatsPanel
-                            title={t(language, "statsTitle")}
-                            comparisons={currentStep?.comparisons ?? 0}
-                            writes={currentStep?.writes ?? 0}
-                            stepLabel={t(language, "step")}
-                            stepIndex={stepIndex}
-                            stepCount={Math.max(steps.length - 1, 0)}
-                            sortedLabel={t(language, "sorted")}
-                            sortedCount={currentStep?.sorted.length ?? 0}
-                            total={baseArray.length}
-                        />
+                <div className="container mx-auto max-w-6xl px-4 md:px-6 py-8 md:py-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div className="lg:col-span-2 space-y-6">
+                            <Narration text={narration} stepIndex={stepIndex} title={t(language, "narrationTitle")} />
+                            <PlaybackControls
+                                isPlaying={isPlaying}
+                                onTogglePlay={handleTogglePlay}
+                                onShuffle={handleShuffle}
+                                onReset={handleReset}
+                                arraySize={arraySize}
+                                onArraySizeChange={handleArraySizeChange}
+                                speed={speed}
+                                onSpeedChange={setSpeed}
+                                stepIndex={stepIndex}
+                                stepCount={Math.max(steps.length - 1, 0)}
+                                onScrub={handleScrub}
+                                labels={{
+                                    play: t(language, "play"), pause: t(language, "pause"),
+                                    shuffle: t(language, "shuffle"), reset: t(language, "reset"),
+                                    arraySize: t(language, "arraySize"), elements: t(language, "elements"),
+                                    speed: t(language, "speed"), speedSlow: t(language, "speedSlow"),
+                                    speedNormal: t(language, "speedNormal"), speedFast: t(language, "speedFast"),
+                                    speedTurbo: t(language, "speedTurbo"),
+                                }}
+                            />
+                        </div>
 
-                        {description && (
-                            <Card className="bg-card/60 backdrop-blur-sm">
-                                <CardHeader>
-                                    <CardTitle className="text-xl">{description.title}</CardTitle>
-                                    <CardDescription className="space-y-0.5">
-                                        <div className="font-mono text-xs">{description.timeComplexity}</div>
-                                        <div className="font-mono text-xs">{description.spaceComplexity}</div>
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="text-sm text-muted-foreground leading-relaxed">{description.description}</p>
-                                </CardContent>
-                            </Card>
-                        )}
+                        <div className="space-y-6">
+                            <StatsPanel
+                                title={t(language, "statsTitle")}
+                                comparisons={currentStep?.comparisons ?? 0}
+                                writes={currentStep?.writes ?? 0}
+                                stepLabel={t(language, "step")}
+                                stepIndex={stepIndex}
+                                stepCount={Math.max(steps.length - 1, 0)}
+                                sortedLabel={t(language, "sorted")}
+                                sortedCount={currentStep?.sorted.length ?? 0}
+                                total={baseArray.length}
+                            />
 
-                        <div className="rounded-xl border border-border bg-card/60 backdrop-blur-sm p-5">
-                            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">{t(language, "growthTitle")}</p>
-                            <p className="text-xs text-muted-foreground mb-4">{t(language, "growthCaption")}</p>
-                            <GrowthChart active={cclass} n={arraySize} maxN={100} labels={growthLabels} />
+                            {description && (
+                                <Panel>
+                                    <h2 className="text-xl font-semibold tracking-tight">{description.title}</h2>
+                                    <div className="mt-1 space-y-0.5">
+                                        <div className="font-mono text-xs text-muted-foreground">{description.timeComplexity}</div>
+                                        <div className="font-mono text-xs text-muted-foreground">{description.spaceComplexity}</div>
+                                    </div>
+                                    <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{description.description}</p>
+                                </Panel>
+                            )}
+
+                            <Panel>
+                                <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">{t(language, "growthTitle")}</p>
+                                <p className="text-xs text-muted-foreground mb-4">{t(language, "growthCaption")}</p>
+                                <GrowthChart active={cclass} n={arraySize} maxN={100} labels={growthLabels} />
+                            </Panel>
                         </div>
                     </div>
                 </div>

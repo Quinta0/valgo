@@ -1,22 +1,22 @@
 import { ReactNode } from 'react';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import './globals.css';
 
-const fontSans = Inter({
+const fontSans = Geist({
     subsets: ['latin'],
     display: 'swap',
     variable: '--font-sans',
 });
 
-const fontMono = JetBrains_Mono({
+const fontMono = Geist_Mono({
     subsets: ['latin'],
     display: 'swap',
     variable: '--font-mono',
 });
 
 export const metadata = {
-    title: 'Valgo — Watch how sorting actually works',
+    title: 'Valgo - Watch how sorting actually works',
     description: 'An animated, narrated visualizer for nine classic sorting algorithms.',
 };
 

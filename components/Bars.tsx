@@ -36,7 +36,7 @@ function colorFor(
         if (action === "swap" || action === "shift" || action === "merge-write" || action === "overwrite") return stateColor.swap;
         return stateColor.compare;
     }
-    if (range && i >= range[0] && i <= range[1]) return "hsl(var(--state-range) / 0.55)";
+    if (range && i >= range[0] && i <= range[1]) return "hsl(var(--state-active-range) / 0.55)";
     return stateColor.idle;
 }
 

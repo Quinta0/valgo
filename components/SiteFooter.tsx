@@ -40,7 +40,7 @@ interface SiteFooterProps {
 export default function SiteFooter({ year, rightsLabel, licenseLabel, viewLicenseLabel, lang, onLangChange }: SiteFooterProps) {
     return (
         <footer className="border-t border-border bg-card/40 py-6 mt-16">
-            <div className="container mx-auto px-4 md:px-6 flex flex-wrap items-center justify-between gap-4">
+            <div className="container mx-auto max-w-6xl px-4 md:px-6 flex flex-wrap items-center justify-between gap-4">
                 <p className="text-sm text-muted-foreground">&copy; {year} Quintavalle Pietro. {rightsLabel}</p>
                 <nav className="flex items-center gap-4">
                     <LanguagePicker value={lang} onChange={onLangChange} />
